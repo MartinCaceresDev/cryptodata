@@ -1,0 +1,137 @@
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home-page-container {
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  padding-top: 4vh;
+  height: 100%;
+}
+
+.home-title {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+.home-title h1 {
+  text-align: center;
+  color: white;
+  font-size: 2.5rem;
+}
+
+.home-search {
+  display: flex;
+  padding-bottom: 5vh;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.home-search input {
+  background-color: #3aafa9;
+  color: white;
+  padding: 4vh 0.8vw;
+  height: 6vh;
+  width: 85%;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.home-search input::placeholder {
+  color: white;
+  font-size: 1.5rem;
+  font-family: '"Segoe UI",Tahoma,Geneva,Verdana,sans-serif';
+}
+
+.home-search img {
+  height: 2.5rem;
+  cursor: pointer;
+  margin-left: 0.3rem;
+}
+
+.home-coins-data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: white;
+}
+
+@media (max-width: 1279px) {
+  .home-page-content {
+    width: 80%;
+  }
+}
+
+@media (max-width: 900px) {
+  .home-page-content {
+    width: 90%;
+  }
+
+  .home-search {
+    width: 50%;
+  }
+
+  .home-title h1 {
+    font-size: 2.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page-content {
+    width: 95%;
+  }
+
+  .home-search {
+    width: 70%;
+  }
+
+  .home-title h1 {
+    font-size: 2.1rem;
+  }
+
+  .home-search input::placeholder {
+    font-size: 1.3rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .home-search {
+    width: 97%;
+  }
+
+  .home-title h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 200px) {
+  .home-title h1 {
+    font-size: 2rem;
+  }
+
+  .home-title h1 {
+    font-size: 1.8rem;
+  }
+}

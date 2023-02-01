@@ -1,0 +1,204 @@
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.coinpage-container {
+  width: 100%;
+  height: 100vh;
+  background-image: url('/src/images/crypto.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+}
+
+.coinpage-content {
+  width: 50%;
+  min-width: 530px;
+  height: 100vh;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  font-size: 1.3rem;
+  padding: 4vh 3rem 4vh;
+  font-weight: 500;
+}
+
+.coinpage-title {
+  padding-bottom: 4vh;
+}
+
+.coinpage-title h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #3aafa9;
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.coinpage-image {
+  padding: 0.5rem;
+  height: 20%;
+}
+
+.coinpage-image img {
+  height: 100%;
+  max-height: 100px;
+}
+
+.coinpage-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 55%;
+}
+
+.coinpage-data-row {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 0.8vh 0;
+}
+
+.red {
+  color: rgb(248, 64, 64);
+}
+
+.green {
+  color: rgb(85, 252, 85);
+}
+
+.coinpage-data-value::before {
+  content: '$';
+  position: relative;
+  right: 0.2rem;
+}
+
+.coinpage-button {
+  margin-top: 1rem;
+}
+
+.coinpage-button > * {
+  background-color: #3aafa9;
+  border-radius: 0.5rem;
+  padding: 1vh 1.3rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.coinpage-button {
+  transition: all 200ms ease-out;
+}
+
+.coinpage-button:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 530px) {
+  .coinpage-content {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .coinpage-data-row {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .coinpage-title h1 {
+    font-size: 3.2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .coinpage-data-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .coinpage-content {
+    padding: 4vh 1rem;
+    width: 100vw;
+    min-width: 100%;
+  }
+
+  .coinpage-title h1 {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 300px) {
+  .coinpage-data-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .coinpage-image {
+    height: 20vh;
+  }
+
+  .coinpage-image img {
+    max-height: 80px;
+    padding-bottom: 1rem;
+  }
+
+  .coinpage-title {
+    padding-bottom: 2vh;
+  }
+
+  .coinpage-title h1 {
+    font-size: 2.2rem;
+  }
+
+  .coinpage-content {
+    padding: 2vh 1rem;
+    height: 100%;
+    min-height: 100vh;
+  }
+
+  .coinpage-container {
+    height: 100%;
+    min-height: 100vh;
+  }
+}
+
+@media (max-width: 200px) {
+  .coinpage-title h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-height: 800px) {
+  .coinpage-container {
+    height: 100%;
+    min-height: 100vh;
+  }
+
+  .coinpage-content {
+    height: 100%;
+    min-height: 100vh;
+  }
+
+  .coinpage-title h1 {
+    font-size: 2.8rem;
+  }
+}
