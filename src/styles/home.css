@@ -1,11 +1,3 @@
-*,
-*:before,
-*:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .home-page-container {
   max-width: 100%;
   overflow-x: hidden;
@@ -27,15 +19,10 @@
 }
 
 .home-title {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 2rem;
-}
-
-.home-title h1 {
   text-align: center;
   color: white;
   font-size: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .home-search {

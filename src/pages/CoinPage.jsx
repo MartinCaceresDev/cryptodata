@@ -1,38 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { url } from '../utils/url';
 import '../styles/coinPage.css';
 
-export default function CoinPage(){
+
+export function CoinPage() {
   const { coinID } = useParams();
   const [coinsData, setCoinsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   const getData = async () => {
-    try{
-      const rawData = await fetch(
-        'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
-        );
+    try {
+      const rawData = await fetch(url, { cors: 'no-cors' });
       const jsonData = await rawData.json();
       setCoinsData(jsonData);
       setIsLoading(false);
     }
-    catch(error){
+    catch (error) {
       console.log(error);
       setIsError(true);
       setIsLoading(false);
     }
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     getData();
   }, [coinID])
 
-  const pageCoin = coinsData.filter(coin =>coin.name === coinID);
+  const pageCoin = coinsData.filter(coin => coin.name === coinID);
   const [coin] = pageCoin;
 
-  if(!isError && !isLoading){
-    return(
+  if (!isError && !isLoading) {
+    return (
       <div className='coinpage-container'>
         <div className='coinpage-content'>
           <div className='coinpage-title'>
@@ -98,8 +98,8 @@ export default function CoinPage(){
       </div>
     );
   }
-  else if(isLoading){
-    return(
+  else if (isLoading) {
+    return (
       <div className='coinpage-container'>
         <div className='coinpage-content'>
           <div className='coinpage-title'>
@@ -110,8 +110,8 @@ export default function CoinPage(){
       </div>
     );
   }
-  else{
-    return(
+  else {
+    return (
       <div className='coinpage-container'>
         <div className='coinpage-content'>
           <div className='coinpage-title'>

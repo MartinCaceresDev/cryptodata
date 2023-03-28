@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import '../styles/home.css';
+import { useState, useEffect, useRef } from 'react';
 import Coin from '../components/Coin';
-import refresh from '../images/refresh.png'
+import { url } from '../utils/url';
+import '../styles/home.css';
+import refresh from '../images/refresh.png';
 
-export default function Home() {
+
+export function Home() {
 	const [coinsData, setCoinsData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [searchTerm, setSearchTerm] = useState('');
@@ -13,9 +15,7 @@ export default function Home() {
 
 	const getData = async () => {
 		try {
-			const rawData = await fetch(
-				'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
-			);
+			const rawData = await fetch(url, { cors: 'no-cors' });
 			const jsonData = await rawData.json();
 			setCoinsData(jsonData);
 			setIsLoading(false);
@@ -36,35 +36,24 @@ export default function Home() {
 
 	const handleSearch = (e) => setSearchTerm(e.target.value);
 
-	const filterCoins = coinsData.filter((coin) => {
-		return coin.name.toLowerCase().includes(searchTerm.toLowerCase());
-	});
+	const filterCoins = coinsData.filter(coin => coin.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
 	return (
 		<div className="home-page-container">
 			<div className="home-page-content">
-				<div className="home-title">
-					<h1>Welcome to the CryptoData</h1>
-				</div>
+
+				<h1 className="home-title">Welcome to the CryptoData</h1>
+
 				<div className="home-search">
-					<input
-						type="text"
-						placeholder="search for a Coin..."
-						onChange={handleSearch}
-						ref={input}
-					/>
-					<img
-						src={refresh}
-						alt="search icon"
-						onClick={getData}
-					/>
+					<input type="text" placeholder="search for a Coin..." onChange={handleSearch} ref={input} />
+					<img src={refresh} alt="search icon" onClick={getData} />
 				</div>
-				<div className="home-coins-data">
+
+				<main className="home-coins-data">
 					{isLoading && <h2>Loading Data...</h2>}
 					{isError && <h2>Data not available.</h2>}
-					{isError ||
-						filterCoins.map((coin) => <Coin key={coin.name} coin={coin} />)}
-				</div>
+					{isError || filterCoins.map((coin) => <Coin key={coin.name} coin={coin} />)}
+				</main>
 			</div>
 		</div>
 	);
