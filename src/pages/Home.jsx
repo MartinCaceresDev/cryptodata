@@ -15,7 +15,7 @@ export function Home() {
 
 	const getData = async () => {
 		try {
-			const rawData = await fetch(url, { cors: 'no-cors' });
+			const rawData = await fetch(url);
 			const jsonData = await rawData.json();
 			setCoinsData(jsonData);
 			setIsLoading(false);
@@ -42,7 +42,7 @@ export function Home() {
 		<div className="home-page-container">
 			<div className="home-page-content">
 
-				<h1 className="home-title">Welcome to the CryptoData</h1>
+				<h1 className="home-title">Welcome to CryptoData</h1>
 
 				<div className="home-search">
 					<input type="text" placeholder="search for a Coin..." onChange={handleSearch} ref={input} />

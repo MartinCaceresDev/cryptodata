@@ -12,7 +12,7 @@ export function CoinPage() {
 
   const getData = async () => {
     try {
-      const rawData = await fetch(url, { cors: 'no-cors' });
+      const rawData = await fetch(url);
       const jsonData = await rawData.json();
       setCoinsData(jsonData);
       setIsLoading(false);
