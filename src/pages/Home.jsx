@@ -51,7 +51,9 @@ export function Home() {
 				<main className="home-coins-data">
 					{isLoading && <h2>Loading Data...</h2>}
 					{isError && <h2>Data not available.</h2>}
-					{isError || filterCoins.map((coin) => <Coin key={coin.name} coin={coin} />)}
+					{!isError
+						&& <div className='home-coins-data-grid'>{filterCoins.map(coin => <Coin key={coin.name} coin={coin} />)}</div>
+					}
 				</main>
 			</div>
 		</div>

@@ -5,8 +5,10 @@ export default function Coin({ coin }) {
   const { name, image, symbol, current_price, market_cap, price_change_percentage_24h } = coin;
 
   return (
-    <article className='coin-row'>
-      <img className='coin-image' src={image} alt={name} />
+    <>
+      <div className='coin-image' >
+        <img src={image} alt={name} />
+      </div>
       <span className='coin-name'>{name}</span>
       <span className='coin-symbol'>{symbol}</span>
       <span className='coin-price'>{current_price.toFixed(2)}</span>
@@ -15,6 +17,6 @@ export default function Coin({ coin }) {
       </span>
       <span className='coin-market'>{market_cap.toLocaleString()}</span>
       <Link to={`/${name}`} className='button-link'> More Info </Link>
-    </article>
+    </>
   );
 }
