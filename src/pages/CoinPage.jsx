@@ -15,116 +15,77 @@ export function CoinPage() {
       const rawData = await fetch(url);
       const jsonData = await rawData.json();
       setCoinsData(jsonData);
-      setIsLoading(false);
-    }
-    catch (error) {
-      console.log(error);
-      setIsError(true);
-      setIsLoading(false);
-    }
+    } catch (error) {
+      setIsError(true)
+    } finally {
+      setIsLoading(false)
+    };
   };
 
   useEffect(() => {
     getData();
   }, [coinID])
 
-  const pageCoin = coinsData.filter(coin => coin.name === coinID);
-  const [coin] = pageCoin;
+  const [coin] = coinsData.filter(coin => coin.name === coinID);
 
-  if (!isError && !isLoading) {
+  if (isLoading) {
     return (
       <div className='coinpage-container'>
         <div className='coinpage-content'>
-          <div className='coinpage-title'>
-            <h1>{coinID}</h1>
-          </div>
-          <div className='coinpage-image'>
-            <img src={coin.image} alt={coin.name} />
-          </div>
-          <div className='coinpage-data'>
-            <div className='coinpage-data-row'>
-              <div className='coinpage-data-header'>
-                Symbol:
-              </div>
-              <div className='coinpage-data-value-symbol'>
-                {coin.symbol}
-              </div>
-            </div>
-            <div className='coinpage-data-row'>
-              <div className='coinpage-data-header'>
-                Current Price:
-              </div>
-              <div className='coinpage-data-value'>
-                {coin.current_price.toLocaleString()}
-              </div>
-            </div>
-            <div className='coinpage-data-row'>
-              <div className='coinpage-data-header'>
-                Market Cap:
-              </div>
-              <div className='coinpage-data-value'>
-                {coin.market_cap.toLocaleString()}
-              </div>
-            </div>
-            <div className='coinpage-data-row'>
-              <div className='coinpage-data-header'>
-                Total Volume:
-              </div>
-              <div className='coinpage-data-value'>
-                {coin.total_volume.toLocaleString()}
-              </div>
-            </div>
-            <div className='coinpage-data-row'>
-              <div className='coinpage-data-header'>
-                24hr High:
-              </div>
-              <div className='coinpage-data-value green'>
-                {coin.high_24h.toLocaleString()}
-              </div>
-            </div>
-            <div className='coinpage-data-row'>
-              <div className='coinpage-data-header'>
-                24hr Low:
-              </div>
-              <div className='coinpage-data-value red'>
-                {coin.low_24h.toLocaleString()}
-              </div>
-            </div>
-          </div>
-          <div className='coinpage-button'>
-            <Link to={'/'}>GO BACK</Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  else if (isLoading) {
-    return (
-      <div className='coinpage-container'>
-        <div className='coinpage-content'>
-          <div className='coinpage-title'>
-            <h1>{coinID}</h1>
-          </div>
+          <h1 className='coinpage-title'>{coinID}</h1>
           <div className='loading'>Loading Data...</div>
         </div>
       </div>
     );
   }
-  else {
+
+  if (isError) {
     return (
       <div className='coinpage-container'>
         <div className='coinpage-content'>
-          <div className='coinpage-title'>
-            <h1>{coinID}</h1>
-          </div>
-          <div className='error'>
-            Data not available.
-          </div>
-          <div className='coinpage-button'>
-            <Link to={'/'}>back</Link>
-          </div>
+          <h1 className='coinpage-title'>{coinID}</h1>
+          <div className='error'>Data not available.</div>
+          <Link to={'/'} className='coinpage-button'>back</Link>
         </div>
       </div>
     );
   }
+
+  return (
+    <div className='coinpage-container'>
+      <div className='coinpage-content'>
+
+        <h1 className='coinpage-title'>{coinID}</h1>
+        <img src={coin.image} alt={coin.name} className='coinpage-image' />
+
+        <div className='coinpage-data'>
+          <div>
+            <span>Symbol:</span>
+            <span>{coin.symbol}</span>
+          </div>
+          <div>
+            <span>Current Price:</span>
+            <span className='coinpage-data-value'>{coin.current_price.toLocaleString()}</span>
+          </div>
+          <div>
+            <span>Market Cap:</span>
+            <span className='coinpage-data-value'>{coin.market_cap.toLocaleString()}</span>
+          </div>
+          <div>
+            <span>Total Volume:</span>
+            <span className='coinpage-data-value'>{coin.total_volume.toLocaleString()}</span>
+          </div>
+          <div>
+            <span>24hr High:</span>
+            <span className='coinpage-data-value green'>{coin.high_24h.toLocaleString()}</span>
+          </div>
+          <div>
+            <span>24hr Low:</span>
+            <span className='coinpage-data-value red'>{coin.low_24h.toLocaleString()}</span>
+          </div>
+        </div>
+        <Link to={'/'} className='coinpage-button'>GO BACK</Link>
+      </div>
+    </div>
+  );
 }

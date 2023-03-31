@@ -16,7 +16,6 @@
 }
 
 .coin-image {
-  height: 100%;
   display: flex;
   align-items: center;
   height: 70%;
@@ -90,18 +89,19 @@
 @media (max-width: 768px) {
   .coin-row {
     flex-wrap: wrap;
-    height: auto;
+    height: 6rem;
     padding: 0.3rem 0;
   }
 
-  .coin-image img {
-    width: 2rem;
+  .coin-image {
     padding: 0;
-    height: 90%;
+    width: 2rem;
+    height: auto;
   }
 
   .coin-row * {
-    margin: 0.3rem;
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
   }
 
   .button-link {

@@ -18,10 +18,9 @@ export function Home() {
 			const rawData = await fetch(url);
 			const jsonData = await rawData.json();
 			setCoinsData(jsonData);
-			setIsLoading(false);
 		} catch (error) {
-			console.log(error);
 			setIsError(true);
+		} finally {
 			setIsLoading(false);
 		}
 	};
