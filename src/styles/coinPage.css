@@ -9,7 +9,6 @@
 .coinpage-container {
   width: 100%;
   height: 100vh;
-  background-image: url('/src/images/crypto.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -101,6 +100,8 @@
 .coinpage-button:hover {
   transform: scale(1.2);
 }
+
+/* MEDIA QUERIES */
 
 @media (max-width: 530px) {
   .coinpage-content {

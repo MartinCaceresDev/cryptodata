@@ -72,6 +72,9 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+
+/* MEDIA QUERIES */
+
 @media (max-width: 1279px) {
   .home-page-content {
     width: 95%;

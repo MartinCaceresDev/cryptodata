@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { url } from '../utils/url';
 import '../styles/coinPage.css';
 
+const backgroundImg = { backgroundImage: "url('https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/crypto-app%2Fcrypto.jpg?alt=media&token=59eef821-7f33-4af2-afe0-346785b4d4ce')" };
 
 export function CoinPage() {
   const { coinID } = useParams();
@@ -30,7 +31,7 @@ export function CoinPage() {
 
   if (isLoading) {
     return (
-      <div className='coinpage-container'>
+      <div className='coinpage-container' style={backgroundImg}>
         <div className='coinpage-content'>
           <h1 className='coinpage-title'>{coinID}</h1>
           <div className='loading'>Loading Data...</div>
@@ -41,7 +42,7 @@ export function CoinPage() {
 
   if (isError) {
     return (
-      <div className='coinpage-container'>
+      <div className='coinpage-container' style={backgroundImg}>
         <div className='coinpage-content'>
           <h1 className='coinpage-title'>{coinID}</h1>
           <div className='error'>Data not available.</div>
@@ -52,7 +53,7 @@ export function CoinPage() {
   }
 
   return (
-    <div className='coinpage-container'>
+    <div className='coinpage-container' style={backgroundImg}>
       <div className='coinpage-content'>
 
         <h1 className='coinpage-title'>{coinID}</h1>

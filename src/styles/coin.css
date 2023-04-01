@@ -72,6 +72,9 @@
   transform: scale(1.2);
 }
 
+
+/* MEDIA QUERIES */
+
 @media (max-width: 1279px) {
   .coin-name {
     font-size: 1.2rem;
@@ -97,9 +100,7 @@
   .button-link {
     font-size: 1rem;
   }
-}
 
-@media (max-width: 480px) {
   .coin-name {
     font-size: 1rem;
   }
