@@ -1,41 +1,35 @@
 import { useState, useEffect, useRef } from 'react';
+import useSWRImmutable from 'swr/immutable';
 import Coin from '../components/Coin';
 import { url } from '../utils/url';
+import { getData } from '../utils/getData';
 import '../styles/home.css';
-import refresh from '../images/refresh.png';
 
 
 export function Home() {
-	const [coinsData, setCoinsData] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
+
+	const { data: coinsData, error, isLoading } = useSWRImmutable(url, getData);
+
 	const [searchTerm, setSearchTerm] = useState('');
-	const [isError, setIsError] = useState(false);
 
 	const input = useRef();
 
-	const getData = async () => {
-		try {
-			const rawData = await fetch(url);
-			const jsonData = await rawData.json();
-			setCoinsData(jsonData);
-		} catch (error) {
-			setIsError(true);
-		} finally {
-			setIsLoading(false);
-		}
-	};
-
-	useEffect(() => {
-		getData();
-	}, []);
-
-	useEffect(() => {
-		input.current.focus();
-	});
+	useEffect(() => input.current.focus());
 
 	const handleSearch = (e) => setSearchTerm(e.target.value);
 
-	const filterCoins = coinsData.filter(coin => coin.name.toLowerCase().includes(searchTerm.toLowerCase()));
+	let content;
+
+	if (isLoading) {
+		content = <h2>Loading Data...</h2>;
+	} else if (error) {
+		content = <h2>Data not available.</h2>;
+	} else {
+		const filterCoins = coinsData.filter(coin => coin.name.toLowerCase().includes(searchTerm.toLowerCase()));
+		content = (
+			<div className='home-coins-data-grid'>{filterCoins.map(coin => <Coin key={coin.name} coin={coin} />)}</div>
+		);
+	}
 
 	return (
 		<div className="home-page-container">
@@ -45,15 +39,10 @@ export function Home() {
 
 				<div className="home-search">
 					<input type="text" placeholder="search for a Coin..." onChange={handleSearch} ref={input} />
-					<img src={refresh} alt="search icon" onClick={getData} />
 				</div>
 
 				<main className="home-coins-data">
-					{isLoading && <h2>Loading Data...</h2>}
-					{isError && <h2>Data not available.</h2>}
-					{!isError
-						&& <div className='home-coins-data-grid'>{filterCoins.map(coin => <Coin key={coin.name} coin={coin} />)}</div>
-					}
+					{content}
 				</main>
 			</div>
 		</div>

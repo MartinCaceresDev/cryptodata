@@ -1,33 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import useSWRImmutable from 'swr/immutable';
 import { url } from '../utils/url';
+import { getData } from '../utils/getData';
 import '../styles/coinPage.css';
 
 const backgroundImg = { backgroundImage: "url('https://firebasestorage.googleapis.com/v0/b/almacenamiento-test-55848.appspot.com/o/crypto-app%2Fcrypto.jpg?alt=media&token=59eef821-7f33-4af2-afe0-346785b4d4ce')" };
 
 export function CoinPage() {
+
   const { coinID } = useParams();
-  const [coinsData, setCoinsData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
 
-  const getData = async () => {
-    try {
-      const rawData = await fetch(url);
-      const jsonData = await rawData.json();
-      setCoinsData(jsonData);
-    } catch (error) {
-      setIsError(true)
-    } finally {
-      setIsLoading(false)
-    };
-  };
-
-  useEffect(() => {
-    getData();
-  }, [coinID])
-
-  const [coin] = coinsData.filter(coin => coin.name === coinID);
+  const { data: coinsData, error, isLoading } = useSWRImmutable(url, getData);
 
   if (isLoading) {
     return (
@@ -38,9 +22,7 @@ export function CoinPage() {
         </div>
       </div>
     );
-  }
-
-  if (isError) {
+  } else if (error) {
     return (
       <div className='coinpage-container' style={backgroundImg}>
         <div className='coinpage-content'>
@@ -51,6 +33,8 @@ export function CoinPage() {
       </div>
     );
   }
+
+  const [coin] = coinsData.filter(coin => coin.name === coinID);
 
   return (
     <div className='coinpage-container' style={backgroundImg}>
